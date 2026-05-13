@@ -5,18 +5,18 @@
 
 /* ── Variables ───────────────────────────────────────────── */
 :root {
-  --black:        #0D0D0D;
-  --black-soft:   #1A1A1A;
-  --black-card:   #222222;
-  --charcoal:     #2C2C2C;
-  --white:        #FFFFFF;
-  --white-soft:   #F0F0F0;
-  --gold:         #C9A84C;
-  --gold-light:   #E2C069;
-  --gold-glow:    rgba(201,168,76,0.18);
-  --text-primary: #FFFFFF;
-  --text-muted:   #AAAAAA;
-  --border-gold:  rgba(201,168,76,0.3);
+  --black:        #0C0906;
+  --black-soft:   #141009;
+  --black-card:   #1E160E;
+  --charcoal:     #2C1F13;
+  --white:        #F5EDD8;
+  --white-soft:   #EDE0C4;
+  --gold:         #C4853C;
+  --gold-light:   #D49A58;
+  --gold-glow:    rgba(196,133,60,0.18);
+  --text-primary: #F5EDD8;
+  --text-muted:   #9A8570;
+  --border-gold:  rgba(196,133,60,0.3);
 
   --font-heading: 'Playfair Display', serif;
   --font-body:    'Montserrat', sans-serif;
@@ -31,7 +31,7 @@
   --ease:       all 0.3s ease;
   --ease-fast:  all 0.18s ease;
 
-  --shadow-gold: 0 0 36px rgba(201,168,76,0.18);
+  --shadow-gold: 0 0 36px rgba(196,133,60,0.18);
   --shadow-card: 0 8px 32px rgba(0,0,0,0.45);
 }
 
@@ -93,7 +93,7 @@ ul   { list-style:none; }
 }
 .btn-gold:hover {
   background:var(--gold-light);
-  box-shadow:0 8px 28px rgba(201,168,76,0.45);
+  box-shadow:0 8px 28px rgba(196,133,60,0.45);
   transform:translateY(-2px);
 }
 .btn-outline {
@@ -124,7 +124,7 @@ ul   { list-style:none; }
   transition:background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
 }
 #nav.scrolled {
-  background:rgba(13,13,13,0.96);
+  background:rgba(12,9,6,0.96);
   border-bottom-color:var(--border-gold);
   backdrop-filter:blur(14px);
 }
@@ -213,9 +213,9 @@ ul   { list-style:none; }
 .hero-bg {
   position:absolute; inset:0; z-index:0;
   background:
-    radial-gradient(ellipse 70% 60% at 15% 55%, rgba(201,168,76,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 85% 20%, rgba(201,168,76,0.04) 0%, transparent 55%),
-    linear-gradient(160deg, #111 0%, #0D0D0D 50%, #161410 100%);
+    radial-gradient(ellipse 70% 60% at 15% 55%, rgba(196,133,60,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 20%, rgba(196,133,60,0.04) 0%, transparent 55%),
+    linear-gradient(160deg, #100B06 0%, #0C0906 50%, #160F08 100%);
 }
 .hero-watermark {
   position:absolute; inset:0; z-index:0;
@@ -407,7 +407,7 @@ ul   { list-style:none; }
 #about::after {
   content:''; position:absolute;
   top:-120px; right:-120px; width:520px; height:520px;
-  background:radial-gradient(circle,rgba(201,168,76,0.05) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(196,133,60,0.05) 0%,transparent 70%);
   pointer-events:none;
 }
 .about-inner {
@@ -422,7 +422,7 @@ ul   { list-style:none; }
   border:2px solid var(--border-gold);
   background:var(--gold-glow);
   display:flex; align-items:center; justify-content:center;
-  position:relative; box-shadow:0 0 48px rgba(201,168,76,0.2);
+  position:relative; box-shadow:0 0 48px rgba(196,133,60,0.2);
 }
 .about-ring::before {
   content:''; position:absolute; inset:-7px; border-radius:50%;
@@ -481,7 +481,7 @@ ul   { list-style:none; }
   background:var(--gold-glow); border:1px solid var(--border-gold);
   transition:var(--ease);
 }
-.about-tag:hover { background:rgba(201,168,76,0.18); }
+.about-tag:hover { background:rgba(196,133,60,0.18); }
 
 /* ── Reviews ─────────────────────────────────────────────── */
 #reviews { padding:var(--sec-pad); background:var(--black-soft); }
@@ -543,7 +543,7 @@ ul   { list-style:none; }
 }
 #booking::before {
   content:''; position:absolute; inset:0;
-  background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 60%);
+  background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(196,133,60,0.07) 0%, transparent 60%);
   pointer-events:none;
 }
 .booking-inner {
@@ -650,7 +650,7 @@ ul   { list-style:none; }
 
 /* ── Footer ──────────────────────────────────────────────── */
 footer {
-  background:#000;
+  background:#080502;
   border-top:1px solid var(--border-gold);
   padding:64px 0 30px;
 }

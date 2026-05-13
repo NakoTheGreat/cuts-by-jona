@@ -99,7 +99,7 @@ function initParticles() {
   window.addEventListener('resize', resize, { passive: true });
 
   const gold = [
-    'rgba(201,168,76,', 'rgba(226,192,105,', 'rgba(180,148,60,'
+    'rgba(196,133,60,', 'rgba(212,154,88,', 'rgba(160,100,40,'
   ];
 
   for (let i = 0; i < 55; i++) {

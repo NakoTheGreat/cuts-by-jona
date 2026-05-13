@@ -5,8 +5,8 @@
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0D0D0D",
-  "theme_color": "#C9A84C",
+  "background_color": "#0C0906",
+  "theme_color": "#C4853C",
   "icons": [
     {
       "src": "https://placehold.co/192x192/0D0D0D/C9A84C?text=CBJ",
