@@ -1,0 +1,767 @@
+<!--
+DEPLOY TO VERCEL — 3 STEPS
+
+1. Go to vercel.com — create a free account
+2. Click "Add New Project" → drag and drop this entire folder
+   Vercel gives you a live URL instantly (e.g. cuts-by-jona.vercel.app)
+3. Open that URL on your phone:
+   ANDROID: tap 3 dots → "Add to Home Screen" → Install
+   IPHONE:  tap Share → "Add to Home Screen"
+
+Works fully offline after first load.
+To update: re-upload the folder to Vercel. Done in seconds.
+Admin panel: visit yoursite.vercel.app/admin — password: jonasadmin
+
+TO SWAP PLACEHOLDER IMAGES:
+  - Replace all src="https://placehold.co/..." with your actual image paths
+  - Portfolio images: work-1.jpg through work-6.jpg in an /images/ folder
+  - About photo: about-jonathan.jpg
+  - Hero background: hero-bg.jpg (the BC logo wall photo)
+
+TO UPDATE THE BOOKSY LINK:
+  - Open js/main.js and update the BOOKSY_URL variable at the top of the file
+
+TO CHANGE ADMIN PASSWORD:
+  - Open js/admin.js and change the PASS_HASH value at the top of the file
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Cuts By Jona — West Milwaukee's premier barber. 25+ years of straight razor shaves, clean fades, and classic cuts. Book online on Booksy.">
+  <meta name="theme-color" content="#C9A84C">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Cuts By Jona">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cuts By Jona @ Barbers Company">
+  <meta property="og:description" content="25 years. One standard. Excellence. West Milwaukee's most experienced barber.">
+  <meta property="og:type" content="website">
+
+  <title>Cuts By Jona @ Barbers Company | West Milwaukee Barber</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="wrap nav-inner">
+
+    <a href="#hero" class="nav-logo">
+      <span class="nav-logo-row">
+        <i class="fa fa-scissors"></i>
+        CUTS BY JONA
+      </span>
+      <span class="sub">@ Barbers Company</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#hero"     data-section="hero">Home</a></li>
+      <li><a href="#services" data-section="services">Services</a></li>
+      <li><a href="#work"     data-section="work">Our Work</a></li>
+      <li><a href="#about"    data-section="about">About</a></li>
+      <li><a href="#reviews"  data-section="reviews">Reviews</a></li>
+    </ul>
+
+    <a href="#" data-booksy class="btn btn-gold nav-book">Book Now</a>
+
+    <button class="nav-burger" id="nav-burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="nav-veil" id="nav-veil"></div>
+<nav class="nav-drawer" id="nav-drawer">
+  <a href="#hero"     data-section="hero">Home</a>
+  <a href="#services" data-section="services">Services</a>
+  <a href="#work"     data-section="work">Our Work</a>
+  <a href="#about"    data-section="about">About</a>
+  <a href="#reviews"  data-section="reviews">Reviews</a>
+  <a href="#booking"  data-section="booking">Book</a>
+  <a href="#location" data-section="location">Location</a>
+  <a href="#" data-booksy class="btn btn-gold drawer-book">Book Now on Booksy</a>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-watermark">BC</div>
+  <canvas id="hero-canvas"></canvas>
+
+  <div class="hero-content">
+
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-line"></span>
+      <span class="hero-eyebrow-text">West Milwaukee, WI · Est. 1999</span>
+    </div>
+
+    <h1 class="hero-title">
+      25 Years.<br>
+      One Standard.<br>
+      <em>Excellence.</em>
+    </h1>
+
+    <p class="hero-sub">
+      Straight razor shaves, clean fades, classic cuts — West Milwaukee's most experienced barber. Every client. Every time.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#" data-booksy class="btn btn-gold">
+        <i class="fa fa-calendar-check"></i> Book Your Appointment
+      </a>
+      <a href="#work" class="btn btn-outline">
+        <i class="fa fa-images"></i> See The Work
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-val" data-count="4.8" data-prefix="">4.8 ★</span>
+        <span class="stat-lbl">Rating</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val" data-count="44" data-suffix="+">44+</span>
+        <span class="stat-lbl">Reviews</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val" data-count="25" data-suffix=" Yrs">25 Yrs</span>
+        <span class="stat-lbl">Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val">All Textures</span>
+        <span class="stat-lbl">Fades · Beards · Cuts</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <i class="fa fa-chevron-down"></i>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SERVICES
+═══════════════════════════════════════════════ -->
+<section id="services">
+  <div class="wrap">
+
+    <div class="services-hd reveal">
+      <span class="sec-label">Pricing</span>
+      <h2 class="sec-title">Services &amp; Pricing</h2>
+      <div class="divider center"></div>
+      <p style="color:var(--text-muted);font-size:14px;margin-top:8px;">
+        Booksy Recommended · Lowest price guaranteed
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- Haircut + Beard -->
+      <div class="svc-card">
+        <div class="svc-icon"><i class="fa fa-scissors"></i></div>
+        <h3 class="svc-name">Hair Cut With Beard</h3>
+        <p class="svc-desc">Full haircut and complete beard shaping — the signature combo. Sharp lines, clean edges, done right.</p>
+        <div class="svc-meta">
+          <span class="svc-duration"><i class="fa fa-clock"></i> 45 min</span>
+          <div class="svc-price-block">
+            <span class="svc-price">$36<sup>+</sup></span>
+            <span class="svc-was">was $40.00</span>
+          </div>
+        </div>
+        <span class="svc-badge">Save up to 10% — lowest price guaranteed</span>
+        <a href="#" data-booksy class="btn btn-gold">
+          <i class="fa fa-calendar-check"></i> Book This Service
+        </a>
+      </div>
+
+      <!-- Haircut -->
+      <div class="svc-card">
+        <div class="svc-icon"><i class="fa fa-cut"></i></div>
+        <h3 class="svc-name">Haircut</h3>
+        <p class="svc-desc">For ages 12+ only. All styles, all textures. Fades, tapers, classics — whatever the vision, Jonathan delivers.</p>
+        <div class="svc-meta">
+          <span class="svc-duration"><i class="fa fa-clock"></i> 45 min</span>
+          <div class="svc-price-block">
+            <span class="svc-price">$31.50<sup>+</sup></span>
+            <span class="svc-was">was $35.00</span>
+          </div>
+        </div>
+        <span class="svc-badge">Save up to 10% — lowest price guaranteed</span>
+        <a href="#" data-booksy class="btn btn-gold">
+          <i class="fa fa-calendar-check"></i> Book This Service
+        </a>
+      </div>
+
+      <!-- Kids -->
+      <div class="svc-card">
+        <div class="svc-icon"><i class="fa fa-child"></i></div>
+        <h3 class="svc-name">Kids 12+</h3>
+        <p class="svc-desc">Clean, fresh cuts for the young ones 12 and up. Patient, precise, and always on point. They'll leave looking their best.</p>
+        <div class="svc-meta">
+          <span class="svc-duration"><i class="fa fa-clock"></i> 45 min</span>
+          <div class="svc-price-block">
+            <span class="svc-price">$27<sup>+</sup></span>
+            <span class="svc-was">was $30.00</span>
+          </div>
+        </div>
+        <span class="svc-badge">Save up to 10% — lowest price guaranteed</span>
+        <a href="#" data-booksy class="btn btn-gold">
+          <i class="fa fa-calendar-check"></i> Book This Service
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     OUR WORK / PORTFOLIO
+═══════════════════════════════════════════════ -->
+<section id="work">
+  <div class="wrap">
+
+    <div class="work-hd reveal">
+      <span class="sec-label">Portfolio</span>
+      <h2 class="sec-title">The Work</h2>
+      <div class="divider center"></div>
+      <p style="color:var(--text-muted);font-size:14px;margin-top:8px;">Every cut a signature. Every client a standard.</p>
+    </div>
+
+    <div class="work-grid">
+
+      <div class="work-card">
+        <!--
+          REPLACE IMAGE: swap src with your photo path, e.g. src="images/work-1.jpg"
+          Desc: Slick back fade with hard part and full shaped beard
+        -->
+        <img
+          src="https://placehold.co/600x600/1A1A1A/C9A84C?text=Cuts+By+Jona"
+          alt="Slick back fade with hard part and shaped beard — Cuts By Jona"
+          loading="lazy">
+        <div class="work-overlay">
+          <p class="work-overlay-title">Slick back fade with hard part &amp; full shaped beard</p>
+          <a href="#" data-booksy class="work-overlay-cta">
+            Book This Style <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <!-- REPLACE IMAGE: work-2.jpg — Barber at work, curly texture -->
+        <img
+          src="https://placehold.co/600x1200/222222/C9A84C?text=25+Years%0AExcellence"
+          alt="Jonathan Oquendo working on a curly texture fade — Cuts By Jona"
+          loading="lazy">
+        <div class="work-overlay">
+          <p class="work-overlay-title">Tight mid fade — natural curl top shaped &amp; preserved</p>
+          <a href="#" data-booksy class="work-overlay-cta">
+            Book This Style <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <!-- REPLACE IMAGE: work-3.jpg — Low skin fade comb-over -->
+        <img
+          src="https://placehold.co/600x600/1A1A1A/C9A84C?text=Cuts+By+Jona"
+          alt="Low skin fade with textured comb-over and beard — Cuts By Jona"
+          loading="lazy">
+        <div class="work-overlay">
+          <p class="work-overlay-title">Low skin fade · textured comb-over · crisp beard lineup</p>
+          <a href="#" data-booksy class="work-overlay-cta">
+            Book This Style <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <!-- REPLACE IMAGE: work-4.jpg — Design neckline -->
+        <img
+          src="https://placehold.co/600x600/222222/C9A84C?text=Cuts+By+Jona"
+          alt="Shadow fade with design neckline — Cuts By Jona"
+          loading="lazy">
+        <div class="work-overlay">
+          <p class="work-overlay-title">Shadow fade · custom design neckline · precision detail work</p>
+          <a href="#" data-booksy class="work-overlay-cta">
+            Book This Style <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <!-- REPLACE IMAGE: work-5.jpg — Classic taper + beard -->
+        <img
+          src="https://placehold.co/600x600/1A1A1A/C9A84C?text=Cuts+By+Jona"
+          alt="Classic taper with skin fade sides and neat beard — Cuts By Jona"
+          loading="lazy">
+        <div class="work-overlay">
+          <p class="work-overlay-title">Classic taper · skin fade sides · neat full beard trim</p>
+          <a href="#" data-booksy class="work-overlay-cta">
+            Book This Style <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <!-- REPLACE IMAGE: work-6.jpg — High bald fade + beard -->
+        <img
+          src="https://placehold.co/600x600/222222/C9A84C?text=Cuts+By+Jona"
+          alt="High bald fade with tight lineup and full beard — Cuts By Jona"
+          loading="lazy">
+        <div class="work-overlay">
+          <p class="work-overlay-title">High bald fade · tight lineup · full beard shape</p>
+          <a href="#" data-booksy class="work-overlay-cta">
+            Book This Style <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-inner">
+
+      <div class="about-photo-wrap reveal">
+        <div class="about-ring">
+          <!--
+            REPLACE IMAGE: swap src with actual photo of Jonathan
+            e.g. src="images/jonathan-oquendo.jpg"
+          -->
+          <img
+            src="https://placehold.co/158x158/2C2C2C/C9A84C?text=JO"
+            alt="Jonathan Oquendo — Cuts By Jona barber West Milwaukee">
+          <span class="about-badge"><i class="fa fa-scissors"></i></span>
+        </div>
+      </div>
+
+      <span class="sec-label reveal">Meet Your Barber</span>
+      <h2 class="sec-title reveal">Jonathan Oquendo</h2>
+      <div class="divider center reveal"></div>
+      <p class="about-tagline reveal">"25 years behind the chair. Still perfecting the craft."</p>
+
+      <div class="about-xp reveal">
+        <span class="about-xp-num">25+</span>
+        <div class="about-xp-txt">
+          <strong>Years of Experience</strong>
+          <span>Professional barber since 1999 · Booksy Recommended</span>
+        </div>
+      </div>
+
+      <p class="about-bio reveal">
+        Jonathan Oquendo has spent over 25 years mastering every technique behind the chair — straight razor shaves, classic haircuts, all fade styles, and every hair texture. His reputation is built on precision, consistency, and making every client feel at home. At Cuts By Jona, you're not just getting a haircut — you're getting the result of a lifetime of dedication to the craft.
+      </p>
+
+      <div class="about-tags reveal">
+        <span class="about-tag">Straight Razor Shaves</span>
+        <span class="about-tag">All Fades</span>
+        <span class="about-tag">Beards</span>
+        <span class="about-tag">Classic Cuts</span>
+        <span class="about-tag">All Hair Textures</span>
+        <span class="about-tag">25+ Years Experience</span>
+      </div>
+
+      <a href="#" data-booksy class="btn btn-gold reveal" style="padding:18px 52px;font-size:13px;letter-spacing:3px;">
+        <i class="fa fa-calendar-check"></i> Book With Jonathan
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     REVIEWS
+═══════════════════════════════════════════════ -->
+<section id="reviews">
+  <div class="wrap">
+
+    <div class="reviews-hd reveal">
+      <span class="sec-label">Client Reviews</span>
+      <h2 class="sec-title">What Clients Say</h2>
+      <div class="divider center"></div>
+    </div>
+
+    <div class="reviews-summary reveal">
+      <span class="reviews-big-num">4.8</span>
+      <div class="reviews-detail">
+        <div class="reviews-stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="reviews-count">44 Verified Reviews on Booksy</div>
+        <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-top:4px;">
+          BOOKSY RECOMMENDED
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-top">
+          <div>
+            <div class="review-author">Carlos</div>
+            <div class="review-stars-sm">
+              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            </div>
+          </div>
+          <div>
+            <div class="review-date">Apr 8, 2026</div>
+            <i class="fa fa-quote-right quote-icon"></i>
+          </div>
+        </div>
+        <p class="review-text">"Good service"</p>
+        <div class="review-service">
+          <i class="fa fa-scissors"></i> Hair Cut With Beard · Jonathan Oquendo
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-top">
+          <div>
+            <div class="review-author">Emmanuel</div>
+            <div class="review-stars-sm">
+              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            </div>
+          </div>
+          <div>
+            <div class="review-date">Mar 12, 2026</div>
+            <i class="fa fa-quote-right quote-icon"></i>
+          </div>
+        </div>
+        <p class="review-text">"10/10 haircut. Very nice guy and great conversation. Highly recommend!"</p>
+        <div class="review-service">
+          <i class="fa fa-scissors"></i> Hair Cut With Beard · Jonathan Oquendo
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-top">
+          <div>
+            <div class="review-author">David</div>
+            <div class="review-stars-sm">
+              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            </div>
+          </div>
+          <div>
+            <div class="review-date">Feb 28, 2026</div>
+            <i class="fa fa-quote-right quote-icon"></i>
+          </div>
+        </div>
+        <p class="review-text">"Great work, he pays attention to detail"</p>
+        <div class="review-service">
+          <i class="fa fa-scissors"></i> Haircut · Jonathan Oquendo
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-top">
+          <div>
+            <div class="review-author">Dion</div>
+            <div class="review-stars-sm">
+              <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            </div>
+          </div>
+          <div>
+            <div class="review-date">Jan 29, 2026</div>
+            <i class="fa fa-quote-right quote-icon"></i>
+          </div>
+        </div>
+        <p class="review-text">"Another satisfied client. Consistency and quality every single time."</p>
+        <div class="review-service">
+          <i class="fa fa-scissors"></i> Hair Cut With Beard · Jonathan Oquendo
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reviews-cta reveal">
+      <a href="#" data-booksy class="btn btn-gold-outline">
+        <i class="fa fa-star"></i> Read All 44 Reviews on Booksy
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     BOOKING
+═══════════════════════════════════════════════ -->
+<section id="booking">
+  <div class="wrap">
+    <div class="booking-inner">
+
+      <span class="sec-label reveal">Book Online</span>
+      <h2 class="sec-title reveal">Ready to Get Fresh?</h2>
+      <div class="divider center reveal"></div>
+      <p class="booking-sub reveal">
+        Book your appointment online in seconds. Evening slots available — perfect after work. Jonathan fits you in so you can walk out looking your best.
+      </p>
+
+      <div class="booking-cta-wrap reveal">
+        <a href="#" data-booksy class="btn btn-gold big-book-btn">
+          <i class="fa fa-calendar-check"></i> Book Now on Booksy
+        </a>
+      </div>
+
+      <div class="booking-info reveal">
+        <div class="booking-info-item">
+          <i class="fa fa-phone"></i>
+          <span><strong>(787) 345-1793</strong></span>
+        </div>
+        <div class="booking-info-item">
+          <i class="fa fa-clock"></i>
+          <span>Evening hours: <strong>5:15 PM – 7:30 PM</strong></span>
+        </div>
+        <div class="booking-info-item">
+          <i class="fa fa-map-marker-alt"></i>
+          <span><strong>5303 W Greenfield Ave</strong>, West Milwaukee, WI</span>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form reveal">
+        <h3>Send a Message</h3>
+        <p class="form-intro">Have a question? Drop Jonathan a note and he'll get back to you.</p>
+
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="First Last" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@email.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="What style are you going for? Any questions?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold form-submit">
+            <i class="fa fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+
+        <div class="form-success" id="form-success">
+          <i class="fa fa-check-circle"></i>
+          <strong>Message sent!</strong>
+          <span>Jonathan will be in touch. See you at the chair.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     LOCATION
+═══════════════════════════════════════════════ -->
+<section id="location">
+  <div class="wrap">
+
+    <div class="location-grid">
+
+      <div class="location-info reveal">
+        <span class="sec-label">Find Us</span>
+        <h2 class="sec-title">Find Us</h2>
+        <div class="divider"></div>
+
+        <div class="location-details">
+          <div class="loc-item">
+            <div class="loc-icon"><i class="fa fa-map-marker-alt"></i></div>
+            <div class="loc-text">
+              <strong>Address</strong>
+              <span>5303 W Greenfield Ave<br>West Milwaukee, WI 53214</span>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon"><i class="fa fa-phone"></i></div>
+            <div class="loc-text">
+              <strong>Phone</strong>
+              <span><a href="tel:+17873451793" style="color:var(--text-muted);">(787) 345-1793</a></span>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon"><i class="fa fa-clock"></i></div>
+            <div class="loc-text">
+              <strong>Hours</strong>
+              <span>Evening appointments<br>5:15 PM – 7:30 PM</span>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon"><i class="fa fa-star"></i></div>
+            <div class="loc-text">
+              <strong>Rating</strong>
+              <span>4.8 ★ — 44 Reviews · Booksy Recommended</span>
+            </div>
+          </div>
+        </div>
+
+        <a
+          href="https://www.google.com/maps/dir/?api=1&destination=5303+W+Greenfield+Ave,+West+Milwaukee,+WI+53214"
+          target="_blank" rel="noopener"
+          class="btn btn-gold">
+          <i class="fa fa-directions"></i> Get Directions
+        </a>
+      </div>
+
+      <div class="location-map reveal">
+        <iframe
+          src="https://maps.google.com/maps?q=5303+W+Greenfield+Ave,+West+Milwaukee,+WI+53214&output=embed&z=16"
+          title="Cuts By Jona location map"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <blockquote class="location-brand reveal">
+        "Cuts By Jona isn't just a chair — it's a craft refined over 25 years. Every client gets the same standard: sharp, clean, and done right the first time."
+      </blockquote>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+
+      <div class="footer-logo-col">
+        <div class="nav-logo">
+          <span class="nav-logo-row">
+            <i class="fa fa-scissors"></i> CUTS BY JONA
+          </span>
+          <span class="sub">@ Barbers Company</span>
+        </div>
+        <p class="footer-about">
+          West Milwaukee's most experienced barber. 25+ years of straight razor shaves, clean fades, and classic cuts. Precision every time.
+        </p>
+        <div class="footer-social">
+          <a href="#" data-booksy aria-label="Booksy">
+            <i class="fa fa-calendar"></i>
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="tel:+17873451793" aria-label="Call">
+            <i class="fa fa-phone"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Our Work</a></li>
+          <li><a href="#about">About Jonathan</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#booking">Book Now</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <address>
+          5303 W Greenfield Ave<br>
+          West Milwaukee, WI 53214<br><br>
+          <a href="tel:+17873451793" style="color:var(--text-muted);">(787) 345-1793</a><br><br>
+          Mon–Sun<br>
+          5:15 PM – 7:30 PM
+        </address>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Cuts By Jona @ Barbers Company. All rights reserved.</span>
+      <span class="footer-booksy">
+        Online booking powered by <a href="#" data-booksy>Booksy</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════
+     PWA INSTALL PROMPTS
+═══════════════════════════════════════════════ -->
+
+<!-- Android / Chrome banner -->
+<div class="pwa-banner" id="pwa-banner">
+  <div class="pwa-icon"><i class="fa fa-scissors"></i></div>
+  <div class="pwa-text">
+    <strong>Add Cuts By Jona to your home screen.</strong>
+    <span>Book appointments faster — works offline too.</span>
+  </div>
+  <div class="pwa-actions">
+    <button class="btn btn-gold pwa-install" id="pwa-install">INSTALL</button>
+    <span class="pwa-later" id="pwa-later">LATER</span>
+  </div>
+</div>
+
+<!-- iOS prompt -->
+<div class="ios-prompt" id="ios-prompt">
+  <div class="ios-card">
+    <i class="fa fa-scissors"></i>
+    <h3>Install Cuts By Jona</h3>
+    <p>
+      Tap the <span class="ios-share"><i class="fa fa-arrow-up"></i></span> Share button,
+      then <strong>"Add to Home Screen"</strong> to install the Cuts By Jona app.
+    </p>
+    <span class="ios-dismiss" id="ios-dismiss">Got it — maybe later</span>
+  </div>
+</div>
+
+
+<script src="js/main.js"></script>
+</body>
+</html>

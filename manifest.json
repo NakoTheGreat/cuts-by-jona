@@ -1,0 +1,22 @@
+{
+  "name": "Cuts By Jona",
+  "short_name": "Cuts By Jona",
+  "description": "West Milwaukee's premier barber — 25 years of excellence",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D0D0D",
+  "theme_color": "#C9A84C",
+  "icons": [
+    {
+      "src": "https://placehold.co/192x192/0D0D0D/C9A84C?text=CBJ",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://placehold.co/512x512/0D0D0D/C9A84C?text=CBJ",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
